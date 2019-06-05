@@ -3,14 +3,14 @@
 RANK=0
 WORLD_SIZE=1
 
-python pretrain_bert.py \
-    --batch-size 4 \
+python3.6 -u pretrain_bert.py \
+    --batch-size 32 \
     --tokenizer-type BertWordPieceTokenizer \
     --cache-dir cache_dir \
     --tokenizer-model-type bert-large-uncased \
     --vocab-size 30522 \
-    --train-data wikipedia \
     --presplit-sentences \
+    --train-data /megatron_workspace/Megatron/Megatron-LM/AA_wiki.json \
     --loose-json \
     --text-key text \
     --split 1000,1,1 \
@@ -23,16 +23,4 @@ python pretrain_bert.py \
     --intermediate-size 4096 \
     --num-attention-heads 16 \
     --hidden-dropout 0.1 \
-    --attention-dropout 0.1 \
-    --train-iters 1000000 \
-    --lr 0.0001 \
-    --lr-decay-style linear \
-    --lr-decay-iters 990000 \
-    --warmup .01 \
-    --weight-decay 1e-2 \
-    --clip-grad 1.0 \
     --fp16 \
-    --fp32-layernorm \
-    --fp32-embedding \
-    --hysteresis 2 \
-    --num-workers 2
