@@ -9,9 +9,9 @@ NODE_RANK=0
 
 DISTRIBUTED_ARGS="--nproc_per_node $WORLD_SIZE --nnodes $NNODES --node_rank $NODE_RANK --master_addr $MASTER_ADDR --master_port $MASTER_PORT"
 
-python -m torch.distributed.launch $DISTRIBUTED_ARGS \
+python3.6 -m torch.distributed.launch $DISTRIBUTED_ARGS \
   pretrain_bert.py \
-    --batch-size 4 \
+    --batch-size 32 \
     --tokenizer-type BertWordPieceTokenizer \
     --cache-dir cache_dir \
     --tokenizer-model-type bert-large-uncased \
@@ -23,7 +23,7 @@ python -m torch.distributed.launch $DISTRIBUTED_ARGS \
     --split 1000,1,1 \
     --lazy-loader \
     --max-preds-per-seq 80 \
-    --seq-length 512 \
+    --seq-length 128 \
     --max-position-embeddings 512 \
     --num-layers 24 \
     --hidden-size 1024 \
